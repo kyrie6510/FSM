@@ -2,20 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : IBossState
+public class BossWalkState : IBossState
 {
+    
+    private BossFSM _fsm;
+    private Animator _animator;
+    
+    public BossWalkState(BossFSM FSM)
+    {
+        this._fsm = FSM;
+        this._animator = FSM.Animator;
+    }
     public void OnEnter()
     {
-        throw new System.NotImplementedException();
+        _animator.Play("BossWalk");
+        
     }
 
     public void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnExit()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

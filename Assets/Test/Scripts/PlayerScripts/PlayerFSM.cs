@@ -67,7 +67,7 @@ namespace PlayerState
             Transition(StateType.idel);
         }
 
-
+        
         public void Transition(StateType state)  //参数是枚举而不是IPlayerState，要通过字典来读
         {
             if (curState != null)
@@ -77,6 +77,7 @@ namespace PlayerState
 
             curState = AllStates[state];
             curState.OnEnter();
+            
         }
         
         

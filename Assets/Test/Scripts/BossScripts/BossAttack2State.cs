@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class BossAttack2State : IBossState
 {
+    
+    private BossFSM _fsm;
+    private Animator _animator;
+    
+    public BossAttack2State(BossFSM FSM)
+    {
+        this._fsm = FSM;
+        this._animator = FSM.Animator;
+    }
     public void OnEnter()
     {
-        throw new System.NotImplementedException();
+        _animator.Play("BossAttack2");
     }
 
     public void OnUpdate()
     {
-        throw new System.NotImplementedException();
+      
     }
 
     public void OnExit()
     {
-        throw new System.NotImplementedException();
+       
     }
 }
