@@ -30,18 +30,12 @@ public class BossIdelState : IBossState
             if (timer <= 0)
             {
                 timer = 0;
-                
-                
-                _fsm.Transition(BossStateType.flash);
+                _animator.Play("BossDisappear");
             }
         }
         
         Debug.Log("timer"+timer);
         
-        // if (Input.GetKeyDown(KeyCode.M))
-        // {
-        //     _animator.Play("BossAttack");
-        // }
         
     }
 

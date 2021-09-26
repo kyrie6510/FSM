@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 147787729}
   - component: {fileID: 147787730}
   - component: {fileID: 147787728}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boss
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 1c56764696094194e9ac0ecfc2d85fe7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a49bfb0f31370d243aa11c6344ce3df7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -417,7 +417,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &147787729
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 147787727}
+  spriteRenderer: {fileID: 0}
   target: {fileID: 0}
   roleProperties:
     flashInterval: 2
@@ -2906,7 +2907,7 @@ GameObject:
   - component: {fileID: 2114998833}
   - component: {fileID: 2114998837}
   - component: {fileID: 2114998838}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

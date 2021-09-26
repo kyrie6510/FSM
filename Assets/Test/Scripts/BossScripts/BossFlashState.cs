@@ -21,31 +21,19 @@ public class BossFlashState : IBossState
     }
     public void OnEnter()
     {
-       _animator.Play("BossDisappear");
-       timer = _fsm.roleProperties.flashInterval;
-       aniInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        ApperPlayerAround();
+        _animator.Play("BossAppear");
+
+        aniInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        
+        timer = _fsm.roleProperties.flashInterval;
     }
 
     public void OnUpdate()
     {
-        // if (timer != 0)
-        // {
-        //     timer -= Time.deltaTime;
-        //     if (timer <= 0)
-        //     {
-        //         timer = 0;
-        //         _fsm.Transition(BossStateType.idel);
-        //     }
-        // }
-
-        if (aniInfo.normalizedTime >= 1.0f)
-        {
-
-            _fsm.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-
-            // StartCoroutine(ApperPlayerAround());
-            ApperPlayerAround();
-        }
+       
+        
+        
         
     }
 
@@ -56,19 +44,20 @@ public class BossFlashState : IBossState
         
     }
 
-    
+
     void ApperPlayerAround()
     {
         //计算生成位置
         Vector2 playerPos = _fsm.target.transform.position;
-        float randomValue = Random.Range(-20, 20);
+         float randomValue = Random.Range(-1, 1);
         _fsm.transform.position = playerPos + new Vector2(randomValue, 2);
+
+         _fsm.spriteRenderer.flipX = playerPos.x > _fsm.transform.position.x; 
+        
         
         //在生成位置出现
-        _fsm.gameObject.GetComponent<SpriteRenderer>().enabled = true; 
-        // _animator.Play("BossAppear");
-         _fsm.Transition(BossStateType.idel);
-
+        _fsm.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+      
     }
     
     

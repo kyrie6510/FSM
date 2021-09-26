@@ -10,7 +10,8 @@ using UnityEngine;
 public class BossProperties
 {
     public float flashInterval;
-
+    
+    
 
 }
 
@@ -25,6 +26,9 @@ public class BossFSM : MonoBehaviour
     public Animator Animator;
     //内部维护了一个状态
     public IBossState curState;
+
+    public SpriteRenderer spriteRenderer;
+    
     
     //通过字典进行转换
     private Dictionary<BossStateType, IBossState> AllStates = new Dictionary<BossStateType, IBossState>();
@@ -42,7 +46,10 @@ public class BossFSM : MonoBehaviour
          AllStates.Add(BossStateType.walk,new BossWalkState(this));
 
          Transition(BossStateType.idel);
-         
+
+
+         spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
     
     public void Transition(BossStateType state)  //参数是枚举而不是IPlayerState，要通过字典来读
@@ -62,6 +69,21 @@ public class BossFSM : MonoBehaviour
         
         target = GameObject.FindGameObjectWithTag("Player");
         
+    }
+
+    public void OnDisapper()
+    {
+        Transition(BossStateType.flash);
+    }
+
+    public void OnApperFinsh()
+    {
+        Transition(BossStateType.idel);
+    }
+
+    public float GetDistance()
+    {
+        return 0;
     }
     
 }
