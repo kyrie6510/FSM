@@ -24,17 +24,28 @@ public class BossIdelState : IBossState
 
     public void OnUpdate()
     {
-        if (timer != 0)
+        
+        if(_fsm.IsInAttackArea())
         {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
+            _fsm.Transition(BossStateType.attack);
+        }
+
+        else
+        {
+            if (timer != 0)
             {
-                timer = 0;
-                _animator.Play("BossDisappear");
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                {
+                    timer = 0;
+                    _animator.Play("BossDisappear");
+                }
             }
         }
         
-        Debug.Log("timer"+timer);
+       
+        
+        Debug.Log("BossIdeltimer"+timer);
         
         
     }

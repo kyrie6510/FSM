@@ -10,9 +10,10 @@ using UnityEngine;
 public class BossProperties
 {
     public float flashInterval;
-    
-    
+    public Transform transAttack;
+    public float attackArea;
 
+    public LayerMask targetLayer;
 }
 
 public enum BossStateType
@@ -81,9 +82,21 @@ public class BossFSM : MonoBehaviour
         Transition(BossStateType.idel);
     }
 
-    public float GetDistance()
+    public void OnAttack1Finish()
     {
-        return 0;
+        Debug.Log("OnAttackFinish");
+        Transition(BossStateType.idel);
+    }
+    
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(roleProperties.transAttack.position,roleProperties.attackArea);
+    }
+
+    public bool IsInAttackArea()
+    {
+        return Physics2D.OverlapCircle(roleProperties.transAttack.position,roleProperties.attackArea,roleProperties.targetLayer);
     }
     
 }

@@ -21,7 +21,7 @@ public class BossAttackState : IBossState
 
     public void OnUpdate()
     {
-
+        
     }
 
     public void OnExit()

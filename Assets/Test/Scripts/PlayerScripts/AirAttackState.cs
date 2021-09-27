@@ -61,7 +61,7 @@ public class AirAttackState : IPlayerState
             }
         }
 
-        Debug.Log("timer"+timer);
+       
         
         if (timer != 0)
         {
