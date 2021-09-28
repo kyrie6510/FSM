@@ -29,23 +29,22 @@ public class BossIdelState : IBossState
         {
             _fsm.Transition(BossStateType.attack);
         }
-
+        
+        
         else
         {
-            if (timer != 0)
+            if (timer > 0)
             {
                 timer -= Time.deltaTime;
-                if (timer <= 0)
-                {
-                    timer = 0;
-                    _animator.Play("BossDisappear");
-                }
             }
+
+            else
+            {
+                _animator.Play("BossDisappear");
+                _fsm.OnAnimationFinshTransition(BossStateType.flash);
+            }
+            
         }
-        
-       
-        
-        Debug.Log("BossIdeltimer"+timer);
         
         
     }
@@ -54,4 +53,8 @@ public class BossIdelState : IBossState
     {
         
     }
+    
+    
+    
+    
 }

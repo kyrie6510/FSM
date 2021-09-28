@@ -21,20 +21,13 @@ public class BossFlashState : IBossState
     }
     public void OnEnter()
     {
-        ApperPlayerAround();
+        AppearPlayerAround();
         _animator.Play("BossAppear");
-
-        aniInfo = _animator.GetCurrentAnimatorStateInfo(0);
-        
-        timer = _fsm.roleProperties.flashInterval;
     }
 
     public void OnUpdate()
     {
-       
-        
-        
-        
+        _fsm.OnAnimationFinshTransition(BossStateType.idel);
     }
 
     
@@ -45,20 +38,17 @@ public class BossFlashState : IBossState
     }
 
 
-    void ApperPlayerAround()
+    void AppearPlayerAround()
     {
         //计算生成位置
         Vector2 playerPos = _fsm.target.transform.position;
-         float randomValue = Random.Range(-1, 1);
+        float randomValue = Random.Range(-1, 1);
         _fsm.transform.position = playerPos + new Vector2(randomValue, 2);
 
-         _fsm.spriteRenderer.flipX = playerPos.x > _fsm.transform.position.x; 
-        
+        _fsm.spriteRenderer.flipX = playerPos.x > _fsm.transform.position.x;
         
         //在生成位置出现
         _fsm.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-      
     }
-    
     
 }

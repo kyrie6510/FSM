@@ -31,6 +31,8 @@ public class BossFSM : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     
     
+    public AnimatorStateInfo AniInfo;
+    
     //通过字典进行转换
     private Dictionary<BossStateType, IBossState> AllStates = new Dictionary<BossStateType, IBossState>();
 
@@ -70,25 +72,38 @@ public class BossFSM : MonoBehaviour
         
         target = GameObject.FindGameObjectWithTag("Player");
         
+        AniInfo = Animator.GetCurrentAnimatorStateInfo(0);
     }
 
-    public void OnDisapper()
+    public void OnDisappear()
     {
         Transition(BossStateType.flash);
     }
 
-    public void OnApperFinsh()
+    public void OnAppearFinish()
     {
         Transition(BossStateType.idel);
     }
 
     public void OnAttack1Finish()
     {
-        Debug.Log("OnAttackFinish");
         Transition(BossStateType.idel);
     }
-    
 
+    public void OnAnimationFinshTransition(BossStateType targetState,Action action = null)
+    {
+        AniInfo = Animator.GetCurrentAnimatorStateInfo(0);
+
+        if (AniInfo.normalizedTime >= .95f)
+        {
+            Transition(targetState);
+        }
+        
+        action?.Invoke();
+        
+    }
+    
+    
     public void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(roleProperties.transAttack.position,roleProperties.attackArea);
@@ -98,5 +113,8 @@ public class BossFSM : MonoBehaviour
     {
         return Physics2D.OverlapCircle(roleProperties.transAttack.position,roleProperties.attackArea,roleProperties.targetLayer);
     }
+    
+    
+    
     
 }
